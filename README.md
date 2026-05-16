@@ -79,4 +79,13 @@ python -m PyInstaller --onefile --noconsole --icon=icon.ico --name MoonStealer s
 
 ---
 
-<h2 align="center">📢 ОБНОВЛЕНИЯ И ПОДДЕРЖКА</h2><p align="center"> <a href="https://discord.gg/S8jKrv9Zc"><img src="https://img.shields.io/badge/Discord%20Server-Присоединиться-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord Server"></a> <br> <sub>Ранние обновления, эксклюзивные сборки, обсуждения</sub> </p><p align="center"> <b>📩 Связь со мной:</b> Discord: <code>@qenivails</code> </p>
+<h2 align="center">📢 ОБНОВЛЕНИЯ И ПОДДЕРЖКА</h2>
+<p align="center">
+  <a href="https://discord.gg/uSK75YnRqE">
+    <img src="https://img.shields.io/badge/Discord%20Server-Присоединиться-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord Server">
+  </a><br>
+  <sub>Ранние обновления, эксклюзивные сборки, обсуждения</sub>
+</p>
+<p align="center">
+  <b>📩 Связь со мной:</b> Discord: <code>@qenivails</code>
+</p>
